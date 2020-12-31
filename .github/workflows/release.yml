@@ -11,31 +11,31 @@ jobs:
         uses: actions/checkout@v1
         with:
           fetch-depth: 1
-      - name: Install dependencies
-        run: |
-          sudo apt update
-          sudo apt -V install \
-            gcc libc6-dev \
-            libx11-dev xorg-dev libxtst-dev libpng++-dev \
-            xcb libxcb-xkb-dev x11-xkb-utils libx11-xcb-dev libxkbcommon-x11-dev \
-            libxkbcommon-dev \
-            xsel xclip \
-            gobjc++
-      - name: OSXCross for CGO Support
-        run: |
-          mkdir /home/runner/work/osxcross
-          git clone https://github.com/plentico/osxcross-target.git /home/runner/work/osxcross/target
-      - name: Setup Go
-        uses: actions/setup-go@v1
-        with:
-          go-version: 1.15
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v2
-        with:
-          version: latest
-          args: release --rm-dist --config .goreleaser.yml
-        env:
-          GITHUB_TOKEN: ${{ secrets.GO_RELEASER_GITHUB_TOKEN }}
+      # - name: Install dependencies
+      #   run: |
+      #     sudo apt update
+      #     sudo apt -V install \
+      #       gcc libc6-dev \
+      #       libx11-dev xorg-dev libxtst-dev libpng++-dev \
+      #       xcb libxcb-xkb-dev x11-xkb-utils libx11-xcb-dev libxkbcommon-x11-dev \
+      #       libxkbcommon-dev \
+      #       xsel xclip \
+      #       gobjc++
+      # - name: OSXCross for CGO Support
+      #   run: |
+      #     mkdir /home/runner/work/osxcross
+      #     git clone https://github.com/plentico/osxcross-target.git /home/runner/work/osxcross/target
+      # - name: Setup Go
+      #   uses: actions/setup-go@v1
+      #   with:
+      #     go-version: 1.15
+      # - name: Run GoReleaser
+      #   uses: goreleaser/goreleaser-action@v2
+      #   with:
+      #     version: latest
+      #     args: release --rm-dist --config .goreleaser.yml
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       - name: Generate README index
         uses: technote-space/toc-generator@v3
         with:
